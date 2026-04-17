@@ -272,7 +272,7 @@ BOOKING_PASSENGERS
 
 ## 4. Create Table SQL
 
-### PostgreSQL Version
+### Mysql Version
 
 ```sql
 -- AIRLINES
