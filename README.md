@@ -1,303 +1,333 @@
 # ✈️ SkyBooking - Website Booking Tiket Pesawat
 
-Halo! Ini adalah website untuk memesan tiket pesawat. Website ini dibuat pakai **React** (untuk tampilan) dan **Bulma** (untuk mempercantik tampilan).
+SkyBooking adalah platform booking tiket pesawat yang dikembangkan dengan teknologi modern menggunakan **React** untuk antarmuka pengguna dan **Bulma CSS Framework** untuk desain yang responsif dan menarik.
 
 ---
 
-## 📖 Apa Itu Website Ini?
+## 📖 Tentang Project
 
-Bayangkan kamu mau pergi liburan naik pesawat. Kamu perlu beli tiket dulu kan? 
-Nah, website ini membantu kamu:
+Website ini menyediakan pengalaman pemesanan tiket pesawat yang intuitif dengan fitur-fitur berikut:
 
-1. **Cari pesawat** - Mau pergi dari mana ke mana? Kapan?
-2. **Pilih pesawat** - Ada banyak pilihan, mau yang murah atau yang cepat?
-3. **Isi data** - Siapa yang mau naik pesawat?
-4. **Selesai!** - Dapat kode booking deh!
+1. **Pencarian Pesawat** - Cari penerbangan berdasarkan rute, tanggal, dan jumlah penumpang
+2. **Perbandingan Penerbangan** - Pilih dari berbagai opsi penerbangan dengan harga yang kompetitif
+3. **Pemesanan** - Isi data penumpang dan selesaikan pemesanan
+4. **Konfirmasi Booking** - Dapatkan kode booking untuk referensi
 
 ---
 
-## 🗂️ Isi Folder Ini
-
-Folder ini isinya banyak file. Ini penjelasannya pakai bahasa gampang:
+## 🗂️ Struktur Folder
 
 ```
 front_end/
 │
-├── src/                      👈 Semua kode website ada di sini
+├── src/                      Direktori utama aplikasi
 │   │
-│   ├── components/           👈 "Bagian-bagian kecil" yang bisa dipakai ulang
-│   │   ├── Navbar.jsx        → Menu di atas (Home, Pesanan, Login)
-│   │   ├── SearchForm.jsx    → Kotak untuk cari pesawat
-│   │   ├── FlightCard.jsx    → Kartu yang menampilkan info pesawat
-│   │   └── Footer.jsx        → Bagian paling bawah website
+│   ├── components/           Komponen reusable
+│   │   ├── Navbar.jsx        Menu navigasi utama
+│   │   ├── SearchForm.jsx    Form pencarian penerbangan
+│   │   ├── FlightCard.jsx    Komponen tampil info pesawat
+│   │   └── Footer.jsx        Footer halaman
 │   │
-│   ├── pages/                👈 "Halaman-halaman" website
-│   │   ├── Home.jsx          → Halaman depan (yang pertama dilihat)
-│   │   ├── SearchResults.jsx → Halaman hasil pencarian pesawat
-│   │   ├── FlightDetail.jsx  → Halaman detail satu pesawat
-│   │   ├── Booking.jsx       → Halaman isi data penumpang
-│   │   ├── Confirmation.jsx  → Halaman "Yeay, berhasil!"
-│   │   ├── Login.jsx         → Halaman masuk akun
-│   │   ├── Register.jsx      → Halaman bikin akun baru
-│   │   └── MyBookings.jsx    → Halaman lihat pesanan kamu
+│   ├── pages/                Halaman-halaman utama
+│   │   ├── Home.jsx          Halaman beranda
+│   │   ├── SearchResults.jsx Halaman hasil pencarian
+│   │   ├── FlightDetail.jsx  Detail penerbangan
+│   │   ├── Booking.jsx       Halaman pemesanan
+│   │   ├── Confirmation.jsx  Konfirmasi booking
+│   │   ├── Login.jsx         Halaman login
+│   │   ├── Register.jsx      Halaman registrasi
+│   │   ├── MyBookings.jsx    Daftar pemesanan user
+│   │   ├── Profile.jsx       Profil pengguna
+│   │   ├── KebijakanPrivasi.jsx  Kebijakan privasi
+│   │   ├── SyaratKetentuan.jsx   Syarat dan ketentuan
+│   │   └── TentangKami.jsx   Tentang kami
 │   │
-│   ├── context/              👈 "Ingatan" untuk data login
-│   │   └── AuthContext.jsx   → Ingat siapa yang lagi login
+│   ├── context/              State management
+│   │   └── AuthContext.jsx   Context untuk autentikasi
 │   │
-│   ├── services/             👈 "Penghubung" ke server (backend)
-│   │   └── api.js            → Semua permintaan data ke server
+│   ├── services/             API integration
+│   │   └── api.js            Konfigurasi API calls
 │   │
-│   ├── config/               👈 "Pengaturan" website
-│   │   └── index.js          → Alamat server, dll
+│   ├── config/               Pengaturan aplikasi
+│   │   └── index.js          Konfigurasi global
 │   │
-│   ├── utils/                👈 "Alat bantu"
-│   │   └── security.js       → Keamanan (cek password, dll)
+│   ├── utils/                Fungsi utilitas
+│   │   └── security.js       Fungsi keamanan
 │   │
-│   ├── data/                 👈 "Data contoh" (nanti diganti server asli)
-│   │   └── flights.js        → Data pesawat palsu untuk latihan
+│   ├── data/                 Data dummy (untuk development)
+│   │   └── flights.js        Contoh data penerbangan
 │   │
-│   └── App.jsx               👈 "Pengatur jalan" (ke halaman mana?)
+│   ├── assets/               Asset statis
+│   │
+│   └── App.jsx               Root component
 │
-├── package.json              👈 Daftar "bahan-bahan" yang dipakai
-└── README.md                 👈 File yang sedang kamu baca ini!
+├── package.json              Dependensi dan scripts
+├── vite.config.js            Konfigurasi Vite
+└── README.md                 File dokumentasi ini
 ```
 
 ---
 
-## 🎯 Cara Kerja Website (Alur Pengguna)
+## 🎯 Alur Pengguna
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  1. BUKA WEBSITE                                                │
+│  1. AKSES WEBSITE                                               │
 │     ↓                                                           │
-│  2. ISI FORM PENCARIAN                                          │
-│     - Dari mana? (Jakarta)                                      │
-│     - Ke mana? (Bali)                                           │
-│     - Tanggal? (15 Januari)                                     │
-│     - Berapa orang? (2)                                         │
+│  2. FORM PENCARIAN PENERBANGAN                                  │
+│     - Asal: Jakarta                                             │
+│     - Tujuan: Bali                                              │
+│     - Tanggal: 15 Januari                                       │
+│     - Penumpang: 2 orang                                        │
 │     ↓                                                           │
-│  3. LIHAT HASIL PENCARIAN                                       │
-│     - Garuda Rp 1.500.000 ✈️                                    │
-│     - Lion Air Rp 800.000 ✈️                                    │
-│     - Citilink Rp 900.000 ✈️                                    │
+│  3. HASIL PENCARIAN                                             │
+│     - Garuda - Rp 1.500.000                                     │
+│     - Lion Air - Rp 800.000                                     │
+│     - Citilink - Rp 900.000                                     │
 │     ↓                                                           │
-│  4. PILIH SATU PESAWAT                                          │
-│     (Klik "Pilih")                                              │
+│  4. PILIH PENERBANGAN                                           │
 │     ↓                                                           │
-│  5. LOGIN DULU (kalau belum)                                    │
+│  5. LOGIN / REGISTRASI                                          │
 │     ↓                                                           │
 │  6. ISI DATA PENUMPANG                                          │
-│     - Nama: John Doe                                            │
-│     - No. KTP: 1234567890                                       │
+│     - Nama lengkap                                              │
+│     - Nomor identitas                                           │
 │     ↓                                                           │
-│  7. SELESAI! 🎉                                                 │
-│     Dapat kode booking: ABC123                                  │
+│  7. KONFIRMASI BOOKING ✓                                        │
+│     - Kode booking: ABC123                                      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🧩 Penjelasan Tiap Bagian
+## 🧩 Deskripsi Komponen
 
-### 1. Components (Bagian Kecil yang Dipakai Ulang)
+### 1. Components (Komponen Reusable)
 
-**Apa itu Component?**
-Bayangkan kamu main LEGO. Setiap balok LEGO adalah "component". 
-Kamu bisa pakai balok yang sama berkali-kali di tempat berbeda.
+Komponen adalah bagian UI yang dapat digunakan kembali di berbagai halaman.
 
-| File | Fungsinya | Ibaratnya |
-|------|-----------|-----------|
-| `Navbar.jsx` | Menu di bagian atas | Seperti papan petunjuk di mall |
-| `SearchForm.jsx` | Form cari pesawat | Seperti mesin pencari Google |
-| `FlightCard.jsx` | Kartu info pesawat | Seperti kartu Yu-Gi-Oh tapi isinya pesawat |
-| `Footer.jsx` | Bagian bawah | Seperti tanda tangan di akhir surat |
+| File | Fungsi |
+|------|--------|
+| `Navbar.jsx` | Menu navigasi utama dengan link ke halaman-halaman |
+| `SearchForm.jsx` | Form pencarian penerbangan (rute, tanggal, penumpang) |
+| `FlightCard.jsx` | Kartu yang menampilkan informasi penerbangan |
+| `Footer.jsx` | Footer dengan informasi perusahaan dan links |
 
-### 2. Pages (Halaman-Halaman)
+### 2. Pages (Halaman-Halaman Utama)
 
-**Apa itu Page?**
-Kalau component itu bagian kecil, page itu halaman lengkap.
-Seperti buku, setiap page adalah satu halaman penuh.
+Setiap page mewakili satu rute/URL di aplikasi.
 
-| File | Kapan Muncul? | Isinya Apa? |
-|------|---------------|-------------|
-| `Home.jsx` | Pertama kali buka website | Form cari + gambar bagus |
-| `SearchResults.jsx` | Setelah klik "Cari" | Daftar pesawat |
-| `FlightDetail.jsx` | Klik "Lihat Detail" | Info lengkap 1 pesawat |
-| `Booking.jsx` | Klik "Pesan" | Form isi data penumpang |
-| `Confirmation.jsx` | Setelah booking selesai | "Yeay berhasil!" + kode |
-| `Login.jsx` | Klik "Masuk" | Form email + password |
-| `Register.jsx` | Klik "Daftar" | Form bikin akun baru |
-| `MyBookings.jsx` | Klik "Pesanan Saya" | Daftar tiket yang sudah dipesan |
+| File | Deskripsi |
+|------|-----------|
+| `Home.jsx` | Halaman beranda dengan hero section dan form pencarian |
+| `SearchResults.jsx` | Halaman menampilkan hasil pencarian penerbangan |
+| `FlightDetail.jsx` | Detail lengkap dari satu penerbangan |
+| `Booking.jsx` | Halaman form pengisian data penumpang |
+| `Confirmation.jsx` | Halaman konfirmasi booking berhasil |
+| `Login.jsx` | Halaman login pengguna |
+| `Register.jsx` | Halaman registrasi akun baru |
+| `MyBookings.jsx` | Halaman daftar pemesanan user yang sudah ada |
+| `Profile.jsx` | Halaman profil pengguna |
 
-### 3. Context (Ingatan Global)
+### 3. Context (State Management)
 
-**Apa itu Context?**
-Bayangkan kamu punya papan tulis besar di rumah. 
-Semua orang di rumah bisa lihat dan tulis di papan itu.
+`AuthContext.jsx` - Mengelola state autentikasi pengguna secara global, sehingga semua komponen dapat mengakses informasi login user.
 
-`AuthContext.jsx` = Papan tulis yang berisi "Siapa yang lagi login?"
+### 4. Services (API Integration)
 
-Jadi semua halaman tahu siapa yang sedang memakai website.
+`api.js` - Berisi fungsi-fungsi untuk berkomunikasi dengan backend API, seperti:
+- Fungsi login, register
+- Fungsi pencarian penerbangan
+- Fungsi pemesanan tiket
+- Fungsi pengambilan data user
 
-### 4. Services (Penghubung ke Server)
+### 5. Config (Konfigurasi)
 
-**Apa itu Services?**
-Seperti pelayan restoran. Kamu pesan makanan ke pelayan, 
-pelayan pergi ke dapur, lalu bawa makanan ke kamu.
+`config/index.js` - Menyimpan pengaturan global seperti base URL API backend.
 
-`api.js` = Pelayan yang menghubungkan website ke server (backend)
+### 6. Utils (Fungsi Utilitas)
 
-### 5. Config (Pengaturan)
+`security.js` - Fungsi-fungsi helper untuk keamanan, validasi input, dan normalisasi data.
 
-**Apa itu Config?**
-Seperti remote TV. Di situ ada tombol-tombol pengaturan.
+### 7. Data (Data Dummy)
 
-`config/index.js` = Pengaturan seperti:
-- Alamat server backend
-- Pakai data sungguhan atau data palsu?
-
-### 6. Utils (Alat Bantu)
-
-**Apa itu Utils?**
-Seperti kotak perkakas. Isinya obeng, palu, dll.
-
-`security.js` = Alat-alat untuk keamanan:
-- Cek apakah password kuat?
-- Bersihkan input dari kode jahat
-- Batasi percobaan login
+`flights.js` - Data dummy untuk keperluan development sebelum backend siap.
 
 ---
 
-## 🚀 Cara Menjalankan Website
+## 🚀 Cara Menjalankan Aplikasi
 
-### Langkah 1: Buka Terminal
-Di VS Code, tekan `` Ctrl + ` `` (tombol di bawah Esc)
+### Prasyarat
+- Node.js v16 atau lebih tinggi
+- npm atau yarn
 
-### Langkah 2: Masuk ke Folder
+### Langkah-Langkah Setup
+
+1. **Buka Terminal**
+   - Tekan `Ctrl + Backtick` di VS Code atau buka terminal terpisah
+
+2. **Masuk ke Folder Frontend**
+   ```bash
+   cd front_end
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+   (Tunggu hingga selesai, sekitar 1-2 menit)
+
+4. **Jalankan Development Server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Akses di Browser**
+   Buka browser dan kunjungi:
+   ```
+   http://localhost:5173/
+   ```
+
+### Build untuk Production
 ```bash
-cd "E:\STT Terpadu Nurul Fikri\Semester 4\Project\Booking_Tiket_Pesawat\front_end"
+npm run build
 ```
-
-### Langkah 3: Install "Bahan-Bahan"
-```bash
-npm install
-```
-(Tunggu sampai selesai, bisa 1-2 menit)
-
-### Langkah 4: Jalankan Website
-```bash
-npm run dev
-```
-
-### Langkah 5: Buka di Browser
-Akan muncul tulisan seperti:
-```
-Local: http://localhost:5173/
-```
-Klik link itu atau buka browser dan ketik alamat tersebut.
-
-### Langkah 6: Selesai! 🎉
-Website sudah jalan. Coba-coba deh!
 
 ---
 
-## 📝 Cara Kerja Kode (Penjelasan Sederhana)
+## 📝 Arsitektur dan Alur Aplikasi
 
-### Bagaimana Halaman Berpindah?
+### Routing (Navigasi Halaman)
 
-Di `App.jsx` ada pengatur jalan seperti ini:
+Aplikasi menggunakan React Router untuk navigasi antar halaman. Pengguna dipandu ke halaman yang sesuai berdasarkan URL path:
 
-```
-Kalau alamat = "/"           → tampilkan Home
-Kalau alamat = "/search"     → tampilkan SearchResults  
-Kalau alamat = "/flight/123" → tampilkan FlightDetail
-Kalau alamat = "/booking"    → tampilkan Booking
-... dan seterusnya
-```
+- `/` → Home (Halaman Beranda)
+- `/search` → Hasil Pencarian
+- `/flight/:id` → Detail Penerbangan
+- `/booking` → Form Pemesanan
+- `/confirmation` → Konfirmasi Booking
+- `/login` → Login
+- `/register` → Registrasi
+- `/my-bookings` → Daftar Pemesanan User
+- `/profile` → Profil User
 
-Seperti lampu lalu lintas yang bilang "ke sini" atau "ke sana".
+### State Management
 
-### Bagaimana Data Login Disimpan?
+**Autentikasi:**
+1. User melakukan login dengan email dan password
+2. Backend memvalidasi kredensial
+3. Token disimpan di localStorage (browser storage)
+4. AuthContext menyimpan data user saat ini secara global
+5. Setiap halaman dapat mengakses informasi login via context
 
-1. Kamu login dengan email + password
-2. Website cek: "Apakah cocok?"
-3. Kalau cocok, simpan data kamu di "ingatan browser" (localStorage)
-4. Setiap halaman bisa cek: "Siapa yang lagi login?"
+### Alur Pemesanan
 
-### Bagaimana Form Pencarian Bekerja?
+1. User mencari penerbangan dengan kriteria (asal, tujuan, tanggal, penumpang)
+2. Sistem menampilkan hasil pencarian dari backend
+3. User memilih penerbangan yang diinginkan
+4. User login (jika belum)
+5. User mengisi form data penumpang
+6. Form divalidasi di frontend
+7. Request dikirim ke backend
+8. Jika berhasil, tampilkan konfirmasi dengan kode booking
 
-1. Kamu isi: Dari Jakarta, Ke Bali, Tanggal 15 Jan
-2. Klik "Cari"
-3. Website cari di data: "Pesawat mana yang cocok?"
-4. Tampilkan hasilnya sebagai kartu-kartu
+### Form Validation
 
----
-
-## 🎨 Tentang Tampilan (CSS)
-
-Website ini pakai **Bulma** untuk mempercantik tampilan.
-
-**Apa itu Bulma?**
-Seperti baju siap pakai. Kamu tinggal bilang "pakai baju merah" dan jadilah merah.
-
-Contoh di kode:
-```html
-<button class="button is-primary">Cari</button>
-```
-- `button` = Ini tombol
-- `is-primary` = Warnanya biru (warna utama)
-
-Gampang kan? Tidak perlu bikin warna sendiri!
+Setiap form memiliki validasi client-side untuk memastikan data valid sebelum dikirim ke server, termasuk:
+- Format email
+- Kekuatan password
+- Format nomor identitas
+- Tanggal yang valid
 
 ---
 
-## 🔐 Tentang Keamanan
+## 🎨 Desain dan Styling
 
-Website ini sudah punya keamanan dasar:
+### Bulma CSS Framework
 
-1. **Password di-hash** - Password tidak disimpan langsung, tapi "diacak" dulu
-2. **Input dibersihkan** - Kalau ada yang coba masukkan kode jahat, akan dibersihkan
-3. **Batasan login** - Kalau salah password 5x, harus tunggu 15 menit
+Aplikasi menggunakan **Bulma** untuk styling dan UI components. Bulma menyediakan:
+- Grid system yang responsif
+- Komponen UI siap pakai (buttons, forms, cards, dll)
+- Konsistensi visual di semua browser
+- Mobile-first design approach
 
----
+### Responsive Design
 
-## 🤝 Kerja Tim
-
-Project ini dikerjakan berdua:
-- **Frontend (kamu)** - Bikin tampilan website (file-file ini)
-- **Backend (teman)** - Bikin server dan database
-
-Nanti kalau backend sudah jadi, tinggal sambungkan!
-
----
-
-## ❓ FAQ (Pertanyaan yang Sering Ditanya)
-
-**Q: Kenapa data pesawat tidak asli?**
-A: Karena belum ada backend. Saat ini pakai data palsu di `flights.js`.
-
-**Q: Kenapa logout langsung hilang semua?**
-A: Karena data disimpan di browser (localStorage). Logout = hapus data.
-
-**Q: Mau tambah halaman baru bagaimana?**
-A: 1. Bikin file baru di `pages/`, 2. Tambahkan route di `App.jsx`
-
-**Q: Mau ganti warna bagaimana?**
-A: Cari class Bulma yang sesuai di https://bulma.io/documentation/
+Layout dirancang responsif dan dapat menyesuaikan dengan berbagai ukuran layar:
+- Desktop (≥1024px)
+- Tablet (768px - 1023px)
+- Mobile (<768px)
 
 ---
 
-## 📚 Mau Belajar Lebih?
+## 🔐 Keamanan
 
-1. **React** - https://react.dev/learn
-2. **Bulma CSS** - https://bulma.io/documentation/
-3. **JavaScript** - https://javascript.info/
+Aplikasi menerapkan beberapa fitur keamanan dasar:
+
+1. **Input Validation** - Semua input pengguna divalidasi untuk mencegah injeksi malicious code
+2. **Secure Storage** - Token autentikasi disimpan dengan aman
+3. **HTTPS Ready** - Siap untuk dijalankan di HTTPS
+4. **CORS Protection** - Konfigurasi CORS untuk melindungi API
+
+Untuk keamanan produksi yang lebih tinggi, lihat dokumentasi backend.
 
 ---
 
-## 🎉 Selamat!
+## 👥 Tim Pengembang
 
-Kamu sudah punya website booking pesawat! 
+Aplikasi SkyBooking dikembangkan oleh tim yang berdedikasi:
+
+### Frontend Team
+- **Fatih Dzakwan Susilo** - Frontend Developer
+- **Shofwatun Najwa** - Frontend Developer
+
+### Backend Team
+- **Muhammad Aqwam Kamil** - Backend Developer
+- **Eka Purnamasari** - Backend Developer
+
+### Database
+- **Muhammad Fajrul Falah** - Database Designer & Administrator
+
+---
+
+## ❓ Pertanyaan yang Sering Diajukan (FAQ)
+
+**Q: Bagaimana cara menambah halaman baru?**
+A: 1. Buat file baru di `src/pages/`, 2. Buat component React, 3. Tambahkan route di `App.jsx`
+
+**Q: Bagaimana cara mengubah warna atau styling?**
+A: Bisa menggunakan Bulma classes atau buat CSS custom di file `.css` masing-masing
+
+**Q: Data penerbangan saya hilang setelah refresh halaman?**
+A: Data saat ini disimpan di memory. Setelah backend terintegrasi, data akan persisten di database.
+
+**Q: Bagaimana cara berkontribusi pada project ini?**
+A: Hubungi tim lead atau buat branch baru untuk development Anda
+
+**Q: Di mana dokumentasi API backend?**
+A: Lihat file BACKEND_INTEGRATION.md untuk informasi tentang integrasi backend
+
+---
+
+## 📚 Referensi dan Dokumentasi
+
+- **React Documentation** - https://react.dev/
+- **Bulma CSS Framework** - https://bulma.io/documentation/
+- **JavaScript Guide** - https://developer.mozilla.org/en-US/docs/Web/JavaScript
+- **Vite Documentation** - https://vitejs.dev/
+- **Backend Integration** - Lihat [BACKEND_INTEGRATION.md](BACKEND_INTEGRATION.md)
+- **Database Schema** - Lihat [DATABASE_SCHEMA.md](../DATABASE_SCHEMA.md)
+
+---
+
+## 📄 Lisensi
+
+Project ini merupakan hasil pengembangan oleh tim untuk tujuan pembelajaran dan akademik.
+
+---
+
+Untuk pertanyaan atau saran, hubungi anggota tim pengembang.
+Selamat menggunakan SkyBooking! ✈️ 
 Meskipun masih pakai data palsu, strukturnya sudah lengkap.
 
 Kalau ada yang bingung, baca komentar di setiap file.
