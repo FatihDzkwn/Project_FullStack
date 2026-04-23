@@ -34,6 +34,8 @@ import { useState } from 'react';
 // useLocation: Untuk mengambil state dari halaman sebelumnya
 // useNavigate: Untuk navigasi ke halaman konfirmasi
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 // formatRupiah: Fungsi untuk format harga
 import { formatRupiah } from '../data/flights';
@@ -71,6 +73,15 @@ function Booking() {
    * || {} = fallback jika tidak ada data (undefined safety)
    */
   const { flight, passengers } = location.state || {};
+
+  const { isLoggedIn } = useAuth();
+
+  // Jika user belum login, redirect ke halaman login dan simpan intent
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login', { state: { redirectTo: '/booking', restoreState: { flight, passengers } } });
+    }
+  }, [isLoggedIn]);
 
   // --------------------------------------------------------------------------
   // VALIDASI DATA

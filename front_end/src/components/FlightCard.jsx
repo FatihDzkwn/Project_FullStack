@@ -23,7 +23,8 @@
 
 // useNavigate: Hook untuk pindah halaman secara programatis
 // Link: Komponen untuk membuat link ke halaman lain
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 // Import fungsi format rupiah dari data helper
 import { formatRupiah } from '../data/flights';
@@ -40,6 +41,8 @@ import { formatRupiah } from '../data/flights';
 function FlightCard({ flight, passengers }) {
   // Hook untuk navigasi ke halaman lain
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isLoggedIn } = useAuth();
 
   // --------------------------------------------------------------------------
   // FUNGSI HANDLER
@@ -51,15 +54,25 @@ function FlightCard({ flight, passengers }) {
    * Mengirim data penerbangan ke halaman booking
    */
   const handleSelect = () => {
-    // navigate() menerima 2 parameter:
-    // 1. Path tujuan
-    // 2. Object dengan property 'state' untuk mengirim data
+    if (!isLoggedIn) {
+      // Redirect ke login, simpan intent untuk kembali ke booking setelah login
+      navigate('/login', { state: { redirectTo: '/booking', restoreState: { flight, passengers } } });
+      return;
+    }
     navigate('/booking', { 
       state: { 
-        flight: flight,      // Data penerbangan yang dipilih
-        passengers: passengers // Jumlah penumpang
+        flight: flight,
+        passengers: passengers
       } 
     });
+  };
+
+  const handleDetailClick = (e) => {
+    if (!isLoggedIn) {
+      navigate('/login', { state: { redirectTo: `/flight/${flight.id}`, restoreState: { passengers } } });
+      return;
+    }
+    navigate(`/flight/${flight.id}`, { state: { passengers } });
   };
 
   // --------------------------------------------------------------------------
@@ -141,13 +154,13 @@ function FlightCard({ flight, passengers }) {
             {/* Tombol-tombol aksi */}
             <div className="buttons is-centered mt-2">
               {/* Link ke halaman detail */}
-              <Link 
-                to={`/flight/${flight.id}`}
-                state={{ passengers: passengers }}
+              <button
+                type="button"
                 className="button is-light is-small"
+                onClick={handleDetailClick}
               >
                 Detail
-              </Link>
+              </button>
               {/* Tombol langsung pilih */}
               <button 
                 className="button is-link is-small"

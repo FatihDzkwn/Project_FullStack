@@ -33,7 +33,7 @@ import { useState } from 'react';
 
 // Link: Untuk navigasi ke halaman register
 // useNavigate: Untuk redirect setelah login berhasil
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // useAuth: Custom hook untuk akses fungsi login
 import { useAuth } from '../context/AuthContext';
@@ -49,6 +49,7 @@ function Login() {
   
   // Hook untuk navigasi programatis
   const navigate = useNavigate();
+  const location = useLocation();
   
   // Mengambil fungsi login dari AuthContext
   const { login } = useAuth();
@@ -95,8 +96,14 @@ function Login() {
     const result = login(email, password);
 
     if (result.success) {
-      // Login berhasil: redirect ke home
-      navigate('/');
+      // Login berhasil: redirect ke tujuan jika ada
+      const redirectTo = location.state?.redirectTo;
+      const restoreState = location.state?.restoreState || {};
+      if (redirectTo) {
+        navigate(redirectTo, { state: restoreState });
+      } else {
+        navigate('/');
+      }
     } else {
       // Login gagal: tampilkan pesan error
       setError(result.message);

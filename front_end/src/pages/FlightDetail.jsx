@@ -27,6 +27,8 @@
 // useNavigate: Untuk pindah halaman secara programatis
 // Link: Untuk membuat link ke halaman lain
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 // Import data penerbangan dan fungsi helper
 import { flights, airports, formatRupiah } from '../data/flights';
@@ -52,6 +54,7 @@ function FlightDetail() {
   
   // Untuk mengambil data yang dikirim dari halaman sebelumnya
   const location = useLocation();
+  const { isLoggedIn } = useAuth();
   
   // State untuk jumlah penumpang (default 1, atau dari halaman sebelumnya)
   const [passengers, setPassengers] = useState(
@@ -85,6 +88,15 @@ function FlightDetail() {
       </div>
     );
   }
+
+  // Redirect ke login jika user belum login
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // Simpan intent agar setelah login user kembali ke halaman ini
+      window.history.replaceState({}, '');
+      navigate('/login', { state: { redirectTo: location.pathname, restoreState: { passengers } } });
+    }
+  }, [isLoggedIn]);
 
   // --------------------------------------------------------------------------
   // DATA TAMBAHAN
