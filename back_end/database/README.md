@@ -5,7 +5,7 @@ Folder ini berisi file-file untuk setup dan manage database MySQL untuk aplikasi
 ## File-File
 
 ### 📋 Migrations (Schema)
-- **`migrations/001_create_tables_mysql.sql`** - Schema database dengan 8 tabel
+- **`migrations/dbtiketpesawat.sql`** - Schema database dengan 8 tabel (Production Version)
 
 ### 📦 Seeds (Sample Data)
 - **`seeds/001_sample_data_mysql.sql`** - Data sample untuk testing (opsional)
@@ -26,7 +26,7 @@ mysql -u root -p sky_booking < database/sky_booking_full.sql
 mysql -u root -p -e "CREATE DATABASE sky_booking;"
 
 # 2. Import schema
-mysql -u root -p sky_booking < database/migrations/001_create_tables_mysql.sql
+mysql -u root -p sky_booking < database/migrations/dbtiketpesawat.sql
 
 # 3. (Opsional) Import sample data
 mysql -u root -p sky_booking < database/seeds/001_sample_data_mysql.sql
