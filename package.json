@@ -1,9 +1,6 @@
 {
   "dependencies": {
-    "bulma": "^1.0.4",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "mysql2": "^3.22.2",
-    "react-router-dom": "^7.13.1"
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3"
   }
 }
