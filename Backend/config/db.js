@@ -1,23 +1,16 @@
 const mysql = require('mysql2');
 
-// Konfigurasi langsung menggunakan kredensial database Railway Anda
-const mysql = require('mysql2');
-
-// Konfigurasi menggunakan endpoint PUBLIC TCP Database Railway Anda
 const dbConfig = {
-  host: 'eseau.proxy.rlwy.net', 
-  user: 'root',
-  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
-  database: 'railway',
-  port: 41891, // Menggunakan port publik database Anda
+  host: process.env.MYSQLHOST || 'mysql.railway.internal',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: process.env.MYSQLDATABASE || 'railway',
+  port: parseInt(process.env.MYSQLPORT) || 3306,
   waitForConnections: true,
-  connectionLimit: 5,
+  connectionLimit: 10,
   queueLimit: 0
 };
 
-
 const pool = mysql.createPool(dbConfig);
-
-console.log('✅ MySQL Config FORCED successfully');
 
 module.exports = pool.promise();
