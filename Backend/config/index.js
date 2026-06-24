@@ -21,13 +21,12 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
-// Ganti baris 25-35 dengan kode di bawah ini:
 const db = mysql.createConnection({
-  host: 'mysql.railway.internal',
-  user: 'root',
-  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
-  database: 'railway',
-  port: 3306
+  host: process.env.MYSQLHOST || 'mysql.railway.internal',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: process.env.MYSQLDATABASE || 'railway',
+  port: parseInt(process.env.MYSQLPORT) || 3306
 });
 
 db.connect((err) => {
