@@ -2,9 +2,10 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 console.log('=== DATABASE CONFIG DEBUG ===');
-console.log('MYSQL_URL env:', process.env.MYSQL_URL ? 'SET' : 'NOT SET');
+console.log('MYSQL_URL env:', process.env.MYSQL_URL ? `SET (${process.env.MYSQL_URL})` : 'NOT SET');
 console.log('DATABASE_URL env:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
 console.log('DB_HOST env:', process.env.DB_HOST || 'NOT SET');
+console.log('NODE_ENV:', process.env.NODE_ENV || 'NOT SET');
 console.log('================================');
 
 let dbConfig = {};
@@ -64,7 +65,14 @@ const db = mysql.createPool(dbConfig);
 // Tes koneksi
 db.getConnection((err, connection) => {
     if (err) {
-        console.error('❌ Database gagal terhubung:', err.message);
+        console.error('❌ DATABASE CONNECTION ERROR:');
+        console.error('   Message:', err.message);
+        console.error('   Code:', err.code);
+        console.error('   Errno:', err.errno);
+        console.error('   Config Host:', dbConfig.host);
+        console.error('   Config Port:', dbConfig.port);
+        console.error('   Config Database:', dbConfig.database);
+        console.error('   Full Error:', err);
     } else {
         console.log('✅ Berhasil terhubung ke database!');
         
