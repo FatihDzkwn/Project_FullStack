@@ -22,11 +22,7 @@ const config = {
 };
 
 const db = mysql.createConnection({
-  host: process.env.MYSQLHOST || 'mysql.railway.internal',
-  user: process.env.MYSQLUSER || 'root',
-  password: process.env.MYSQLPASSWORD || 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
-  database: process.env.MYSQLDATABASE || 'railway',
-  port: parseInt(process.env.MYSQLPORT) || 3306
+  uri: process.env.MYSQL_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway'
 });
 
 db.connect((err) => {
