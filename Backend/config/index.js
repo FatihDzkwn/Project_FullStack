@@ -23,11 +23,11 @@ const config = {
 
 // Ganti baris 25-35 dengan kode di bawah ini:
 const db = mysql.createConnection({
-  host: 'eseau.proxy.rlwy.net',
+  host: 'mysql.railway.internal',
   user: 'root',
   password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
   database: 'railway',
-  port: 41891
+  port: 3306
 });
 
 db.connect((err) => {
@@ -37,6 +37,7 @@ db.connect((err) => {
     console.log('✅ Connected to Railway MySQL Database successfully!');
   }
 });
+
 
 // Export keduanya: config (untuk pengaturan) dan db (untuk query)
 module.exports = { config, db };
