@@ -5,15 +5,24 @@ require('dotenv').config();
 let dbConfig = {};
 
 if (process.env.DATABASE_URL) {
-    // Parse MySQL URL: mysql://user:password@host:port/database
-    const url = new URL(process.env.DATABASE_URL);
-    dbConfig = {
-        host: url.hostname,
-        user: url.username,
-        password: url.password,
-        database: url.pathname.slice(1), // Remove leading '/'
-        port: url.port || 3306
-    };
+    try {
+        // Parse MySQL URL: mysql://user:password@host:port/database
+        const url = new URL(process.env.DATABASE_URL);
+        dbConfig = {
+            host: url.hostname,
+            user: url.username,
+            password: url.password,
+            database: url.pathname.slice(1), // Remove leading '/'
+            port: url.port || 3306,
+            waitForConnections: true,
+            connectionLimit: 10,
+            queueLimit: 0
+        };
+        console.log(`📦 Using DATABASE_URL: ${url.hostname}:${url.port}/${url.pathname.slice(1)}`);
+    } catch (err) {
+        console.error('❌ Failed to parse DATABASE_URL:', err.message);
+        process.exit(1);
+    }
 } else {
     // Fallback untuk development
     dbConfig = {
@@ -21,8 +30,12 @@ if (process.env.DATABASE_URL) {
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
         database: process.env.DB_NAME || 'skybooking',
-        port: process.env.DB_PORT || 3306
+        port: process.env.DB_PORT || 3306,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
     };
+    console.log('📦 Using local environment variables');
 }
 
 // Membuat kolam koneksi (pool)
