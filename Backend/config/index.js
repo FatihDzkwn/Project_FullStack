@@ -21,19 +21,20 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
-// Buat koneksi database menggunakan data dari config di atas
+// Ganti baris 25-35 dengan kode di bawah ini:
 const db = mysql.createConnection({
-  host: config.DB.HOST,
-  user: config.DB.USER,
-  password: config.DB.PASSWORD,
-  database: config.DB.NAME
+  host: 'eseau.proxy.rlwy.net',
+  user: 'root',
+  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: 'railway',
+  port: 41891
 });
 
 db.connect((err) => {
   if (err) {
-    console.error('Database connection failed:', err.message);
+    console.error('❌ Database connection failed:', err.message);
   } else {
-    console.log('Connected to MySQL Database!');
+    console.log('✅ Connected to Railway MySQL Database successfully!');
   }
 });
 
