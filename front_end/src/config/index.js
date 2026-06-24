@@ -28,23 +28,22 @@ const config = {
    * Base URL untuk API backend
    * 
    * DEVELOPMENT: http://localhost:5000
-   * PRODUCTION: https://api.yourdomain.com
+   * PRODUCTION: https://railway-backend-url.railway.app (dari Railway)
    * 
-   * Cara ganti:
-   * - Langsung edit nilai di bawah, ATAU
-   * - Buat file .env dengan: VITE_API_URL=http://localhost:5000
+   * Diatur via environment variables di .env dan .env.production
    */
   API_BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
   
   /**
    * Gunakan mock data (simulasi) atau API asli
    * 
-   * true  = Gunakan data localStorage (untuk development frontend)
+   * true  = Gunakan data localhost (untuk development frontend)
    * false = Gunakan API backend asli
    * 
    * ⚠️ PENTING: Set ke false saat integrasi backend!
+   * Diatur via .env: VITE_USE_MOCK_DATA=false
    */
-  USE_MOCK_DATA: true,
+  USE_MOCK_DATA: import.meta.env.VITE_USE_MOCK_DATA === 'true',
   
   /**
    * Timeout untuk API request (dalam milliseconds)
