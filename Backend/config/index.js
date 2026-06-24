@@ -21,15 +21,25 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
-const db = mysql.createConnection({
-  uri: process.env.MYSQL_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway'
+// Hapus baris koneksi db lama dan ganti dengan blok ini:
+const db = mysql.createPool({
+  host: process.env.MYSQLHOST || 'mysql.railway.internal',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: process.env.MYSQLDATABASE || 'railway',
+  port: parseInt(process.env.MYSQLPORT) || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect((err) => {
+// Tes koneksi pool
+db.getConnection((err, connection) => {
   if (err) {
     console.error('❌ Database connection failed:', err.message);
   } else {
-    console.log('✅ Connected to Railway MySQL Database successfully!');
+    console.log('✅ Connected to Railway MySQL Database via Pool successfully!');
+    connection.release(); // Kembalikan koneksi ke pool
   }
 });
 
