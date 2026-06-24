@@ -21,12 +21,11 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
-// Hapus baris koneksi db lama dan ganti dengan blok ini:
 const db = mysql.createPool({
-  host: process.env.MYSQLHOST || 'mysql.railway.internal',
-  user: process.env.MYSQLUSER || 'root',
-  password: process.env.MYSQLPASSWORD || 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
-  database: process.env.MYSQLDATABASE || 'railway',
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
   port: parseInt(process.env.MYSQLPORT) || 3306,
   waitForConnections: true,
   connectionLimit: 10,
