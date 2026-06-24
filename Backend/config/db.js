@@ -5,15 +5,16 @@ const mysql = require('mysql2');
 
 // Konfigurasi menggunakan endpoint PUBLIC TCP Database Railway Anda
 const dbConfig = {
-  host: 'mysql.railway.internal', // Jika ini gagal, ganti dengan: 'dan.proxy.rlwy.net'
+  host: 'eseau.proxy.rlwy.net', 
   user: 'root',
   password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
   database: 'railway',
-  port: 3306, // Jika diubah ke domain proxy luar, sesuaikan portnya (contoh dari gambar pertama Anda: 41891)
+  port: 41891, // Menggunakan port publik database Anda
   waitForConnections: true,
   connectionLimit: 5,
   queueLimit: 0
 };
+
 
 const pool = mysql.createPool(dbConfig);
 
