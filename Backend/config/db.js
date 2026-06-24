@@ -1,11 +1,14 @@
 const mysql = require('mysql2');
-require('dotenv').config();
+
+// HANYA load .env untuk LOCAL DEVELOPMENT (bukan production)
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 console.log('=== DATABASE CONFIG DEBUG ===');
-console.log('MYSQL_URL env:', process.env.MYSQL_URL ? `SET (${process.env.MYSQL_URL})` : 'NOT SET');
+console.log('NODE_ENV:', process.env.NODE_ENV || 'NOT SET (defaulting to dev)');
+console.log('MYSQL_URL env:', process.env.MYSQL_URL ? `SET (${process.env.MYSQL_URL.substring(0, 50)}...)` : 'NOT SET');
 console.log('DATABASE_URL env:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
-console.log('DB_HOST env:', process.env.DB_HOST || 'NOT SET');
-console.log('NODE_ENV:', process.env.NODE_ENV || 'NOT SET');
 console.log('================================');
 
 let dbConfig = {};
