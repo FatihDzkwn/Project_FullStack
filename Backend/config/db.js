@@ -1,26 +1,31 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-// Parse DATABASE_URL atau gunakan individual env variables
+// Parse database connection string
 let dbConfig = {};
 
-if (process.env.DATABASE_URL) {
+// Priority: MYSQL_URL > DATABASE_URL > individual env vars
+const connectionUrl = process.env.MYSQL_URL || process.env.DATABASE_URL;
+
+if (connectionUrl) {
     try {
         // Parse MySQL URL: mysql://user:password@host:port/database
-        const url = new URL(process.env.DATABASE_URL);
+        const url = new URL(connectionUrl);
         dbConfig = {
             host: url.hostname,
             user: url.username,
             password: url.password,
             database: url.pathname.slice(1), // Remove leading '/'
-            port: url.port || 3306,
+            port: parseInt(url.port) || 3306,
             waitForConnections: true,
             connectionLimit: 10,
-            queueLimit: 0
+            queueLimit: 0,
+            enableKeepAlive: true,
+            keepAliveInitialDelayMs: 0
         };
-        console.log(`📦 Using DATABASE_URL: ${url.hostname}:${url.port}/${url.pathname.slice(1)}`);
+        console.log(`✅ MySQL Config: host=${url.hostname}, port=${url.port}, db=${url.pathname.slice(1)}`);
     } catch (err) {
-        console.error('❌ Failed to parse DATABASE_URL:', err.message);
+        console.error('❌ Failed to parse connection URL:', err.message);
         process.exit(1);
     }
 } else {
@@ -30,12 +35,12 @@ if (process.env.DATABASE_URL) {
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
         database: process.env.DB_NAME || 'skybooking',
-        port: process.env.DB_PORT || 3306,
+        port: parseInt(process.env.DB_PORT) || 3306,
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0
     };
-    console.log('📦 Using local environment variables');
+    console.log('✅ Using local environment variables');
 }
 
 // Membuat kolam koneksi (pool)
