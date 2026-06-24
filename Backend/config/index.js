@@ -22,11 +22,7 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: parseInt(process.env.MYSQLPORT) || 3306,
+  uri: 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -37,10 +33,11 @@ db.getConnection((err, connection) => {
   if (err) {
     console.error('❌ Database connection failed:', err.message);
   } else {
-    console.log('✅ Connected to Railway MySQL Database via Pool successfully!');
-    connection.release(); // Kembalikan koneksi ke pool
+    console.log('✅ CONNECTED TO RAILWAY MYSQL DATABASE SUCCESSFULLY!');
+    connection.release();
   }
 });
+
 
 
 // Export keduanya: config (untuk pengaturan) dan db (untuk query)
