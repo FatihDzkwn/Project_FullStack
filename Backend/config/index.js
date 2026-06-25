@@ -22,15 +22,10 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: 'mysql.railway.internal', // Kembalikan ke host internal privat
-  user: 'skyuser',
-  password: 'SkyPassword123!',
-  database: 'railway',
-  port: 3306, // Kembalikan ke port internal privat 3306
+  uri: process.env.DATABASE_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
-
 
 module.exports = { config, db };
