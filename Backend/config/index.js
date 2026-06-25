@@ -22,18 +22,15 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: 'mysql.railway.internal',
+  host: 'eseau.proxy.rlwy.net', // Menggunakan domain proxy publik Anda
   user: 'root',
   password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
   database: 'railway',
-  port: 3306,
+  port: 41891, // Menggunakan port publik MySQL Anda
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0,
-  // Baris kunci pemutus masalah Access Denied pada MySQL 8 Railway:
-  authPlugins: {
-    mysql_clear_password: () => Buffer.from('AARCsfXzm0IwbjcVMohTUqEYttSYJD\0')
-  }
+  queueLimit: 0
 });
+
 
 module.exports = { config, db };
