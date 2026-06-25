@@ -25,7 +25,12 @@ const db = mysql.createPool({
   uri: process.env.DATABASE_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  // Kunci utama agar diizinkan masuk ke database cloud luar:
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
 
 module.exports = { config, db };
