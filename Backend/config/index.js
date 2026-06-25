@@ -22,15 +22,14 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: 'eseau.proxy.rlwy.net',
+  host: 'mysql.railway.internal',
   user: 'root',
   password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
   database: 'railway',
-  port: 41891,
+  port: 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-// Ekspor keduanya tanpa menggunakan .promise() agar cocok dengan callback db.query
 module.exports = { config, db };
