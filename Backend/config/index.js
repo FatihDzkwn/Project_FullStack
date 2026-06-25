@@ -29,8 +29,11 @@ const db = mysql.createPool({
   port: 3306,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  // Baris kunci pemutus masalah Access Denied pada MySQL 8 Railway:
+  authPlugins: {
+    mysql_clear_password: () => Buffer.from('AARCsfXzm0IwbjcVMohTUqEYttSYJD\0')
+  }
 });
-
 
 module.exports = { config, db };
