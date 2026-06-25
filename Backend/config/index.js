@@ -21,24 +21,23 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
+// Ganti blok createPool lama dengan kode ini:
 const db = mysql.createPool({
-  uri: 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
+  uri: process.env.MYSQL_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-// Tes koneksi pool
+// Tes koneksi pool resmi produksi
 db.getConnection((err, connection) => {
   if (err) {
     console.error('❌ Database connection failed:', err.message);
   } else {
-    console.log('✅ CONNECTED TO RAILWAY MYSQL DATABASE SUCCESSFULLY!');
+    console.log('✅ Connected to Railway MySQL Database via Reference URL successfully!');
     connection.release();
   }
 });
-
-
 
 // Export keduanya: config (untuk pengaturan) dan db (untuk query)
 module.exports = { config, db };
