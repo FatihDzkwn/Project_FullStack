@@ -18,7 +18,7 @@ const config = {
     EXPIRY: process.env.JWT_EXPIRY || '7d',
   },
   
-  // ... sisanya code kamu yang tadi ...
+
 };
 
 const db = mysql.createPool({
@@ -32,15 +32,5 @@ const db = mysql.createPool({
   queueLimit: 0
 });
 
-// Tes koneksi pool langsung produksi luar
-db.getConnection((err, connection) => {
-  if (err) {
-    console.error('❌ Database connection failed:', err.message);
-  } else {
-    console.log('✅ CONNECTED TO RAILWAY MYSQL DATABASE SUCCESSFULLY VIA PROXY!');
-    connection.release();
-  }
-});
-
-// Export keduanya: config (untuk pengaturan) dan db (untuk query)
+// Ekspor keduanya tanpa menggunakan .promise() agar cocok dengan callback db.query
 module.exports = { config, db };
