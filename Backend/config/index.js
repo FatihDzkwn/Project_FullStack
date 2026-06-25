@@ -23,8 +23,8 @@ const config = {
 
 const db = mysql.createPool({
   host: 'reseau.proxy.rlwy.net', // Menggunakan domain proxy publik Anda
-  user: 'root',
-  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  user: 'skyuser',
+  password: 'SkyPassword123!',
   database: 'railway',
   port: 41891, // Menggunakan port publik MySQL Anda
   waitForConnections: true,
