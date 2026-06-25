@@ -22,11 +22,11 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: 'reseau.proxy.rlwy.net', // Menggunakan domain proxy publik Anda
+  host: 'mysql.railway.internal', // Kembalikan ke host internal privat
   user: 'skyuser',
   password: 'SkyPassword123!',
   database: 'railway',
-  port: 41891, // Menggunakan port publik MySQL Anda
+  port: 3306, // Kembalikan ke port internal privat 3306
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
