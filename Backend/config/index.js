@@ -21,20 +21,23 @@ const config = {
   // ... sisanya code kamu yang tadi ...
 };
 
-// Ganti blok createPool lama dengan kode ini:
 const db = mysql.createPool({
-  uri: process.env.MYSQL_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
+  host: 'eseau.proxy.rlwy.net',
+  user: 'root',
+  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: 'railway',
+  port: 41891,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-// Tes koneksi pool resmi produksi
+// Tes koneksi pool langsung produksi luar
 db.getConnection((err, connection) => {
   if (err) {
     console.error('❌ Database connection failed:', err.message);
   } else {
-    console.log('✅ Connected to Railway MySQL Database via Reference URL successfully!');
+    console.log('✅ CONNECTED TO RAILWAY MYSQL DATABASE SUCCESSFULLY VIA PROXY!');
     connection.release();
   }
 });
