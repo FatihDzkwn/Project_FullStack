@@ -22,7 +22,7 @@ const config = {
 };
 
 const db = mysql.createPool({
-  host: 'eseau.proxy.rlwy.net', // Menggunakan domain proxy publik Anda
+  host: 'reseau.proxy.rlwy.net', // Menggunakan domain proxy publik Anda
   user: 'root',
   password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
   database: 'railway',
