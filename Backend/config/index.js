@@ -21,6 +21,12 @@ const config = {
 
 };
 
+// Definisikan objek config standar aplikasi
+const config = {
+  PORT: process.env.PORT || 8080,
+  APP_NAME: 'SkyBooking'
+};
+
 const db = mysql.createPool({
   host: process.env.MYSQLHOST || 'mysql.railway.internal',
   user: process.env.MYSQLUSER || 'root',
