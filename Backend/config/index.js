@@ -21,8 +21,6 @@ const config = {
 
 };
 
-const mysql = require('mysql2');
-
 const db = mysql.createPool({
   host: process.env.MYSQLHOST || 'mysql.railway.internal',
   user: process.env.MYSQLUSER || 'root',
