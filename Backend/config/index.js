@@ -21,12 +21,16 @@ const config = {
 
 };
 
-
 const db = mysql.createPool({
-  uri: process.env.DATABASE_URL || 'mysql://root:AARCsfXzm0IwbjcVMohTUqEYttSYJD@mysql.railway.internal:3306/railway',
+  host: 'mysql.railway.internal',
+  user: 'root',
+  password: 'AARCsfXzm0IwbjcVMohTUqEYttSYJD',
+  database: 'railway',
+  port: 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
+
 
 module.exports = { config, db };
